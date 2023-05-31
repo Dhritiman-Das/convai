@@ -1,25 +1,17 @@
 import React from "react";
 import Message from "./message";
+import { useSelector } from "react-redux";
 
 const Body = () => {
+  const chatHistory = useSelector((state) => state.emulator.chatHistory);
   return (
     <div className="flex-grow overflow-y-auto">
-      <Message by="bot" message="Hello how you doing?" />
-      <Message
-        by="human"
-        message="I'm doing great man this is a very long message. I'm doing great man this is a very long message. I'm doing great man this is a very long message"
-      />
-      <Message by="bot" message="Hello how you doing?" />
-      <Message
-        by="human"
-        message="I'm doing great man this is a very long message. I'm doing great man this is a very long message. I'm doing great man this is a very long message"
-      />
-      <Message by="bot" message="Hello how you doing?" />
-      <Message by="bot" message="Hello how you doing?" />
-      <Message
-        by="human"
-        message="I'm doing great man this is a very long message. I'm doing great man this is a very long message. I'm doing great man this is a very long message"
-      />
+      {chatHistory.map((item) => (
+        <>
+          {item.by == "human" && <Message by="human" message={item.message} />}
+          {item.by == "bot" && <Message by="bot" message={item.message} />}
+        </>
+      ))}
     </div>
   );
 };

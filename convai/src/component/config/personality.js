@@ -1,73 +1,76 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { emulatorActions } from "../../store/emulatorSlice";
 
 const Personality = () => {
-  const [active, setActive] = useState("");
+  const dispatch = useDispatch();
+  const personality = useSelector((state) => state.emulator.personality);
   return (
     <div className="my-4">
       <div className="text-[24px] mb-2">Bot personality</div>
       <div className="flex flex-wrap gap-3 my-1">
         <div
           className={`cursor-pointer hover:scale-[1.05] h-fit bg-gradient-to-br from-gray-200 to-gray-400 text-gray-700 font-medium rounded-xl px-3 py-1 shadow-sm shadow-gray-300 ${
-            active == "Confident" &&
+            personality == "Confident" &&
             "from-purple-200 to-purple-400 border-[2px] border-purple-600 shadow-none"
           }`}
           onClick={() => {
-            setActive("Confident");
+            dispatch(emulatorActions.personalityUpdated("Confident"));
           }}
         >
           Confident
         </div>
         <div
           className={`cursor-pointer hover:scale-[1.05] h-fit bg-gradient-to-br from-gray-200 to-gray-400 text-gray-700 font-medium rounded-xl px-3 py-1 shadow-sm shadow-gray-300 ${
-            active == "Passionate" &&
+            personality == "Passionate" &&
             "from-purple-200 to-purple-400 border-[2px] border-purple-600 shadow-none"
           }`}
           onClick={() => {
-            setActive("Passionate");
+            dispatch(emulatorActions.personalityUpdated("Passionate"));
           }}
         >
           Passionate
         </div>
         <div
           className={`cursor-pointer hover:scale-[1.05] h-fit bg-gradient-to-br from-gray-200 to-gray-400 text-gray-700 font-medium rounded-xl px-3 py-1 shadow-sm shadow-gray-300 ${
-            active == "Calm" &&
+            personality == "Calm" &&
             "from-purple-200 to-purple-400 border-[2px] border-purple-600 shadow-none"
           }`}
           onClick={() => {
-            setActive("Calm");
+            dispatch(emulatorActions.personalityUpdated("Calm"));
           }}
         >
           Calm
         </div>
         <div
           className={`cursor-pointer hover:scale-[1.05] h-fit bg-gradient-to-br from-gray-200 to-gray-400 text-gray-700 font-medium rounded-xl px-3 py-1 shadow-sm shadow-gray-300 ${
-            active == "Empathetic" &&
+            personality == "Empathetic" &&
             "from-purple-200 to-purple-400 border-[2px] border-purple-600 shadow-none"
           }`}
           onClick={() => {
-            setActive("Empathetic");
+            dispatch(emulatorActions.personalityUpdated("Empathetic"));
           }}
         >
           Empathetic
         </div>
         <div
           className={`cursor-pointer hover:scale-[1.05] h-fit bg-gradient-to-br from-gray-200 to-gray-400 text-gray-700 font-medium rounded-xl px-3 py-1 shadow-sm shadow-gray-300 ${
-            active == "Angry" &&
+            personality == "Angry" &&
             "from-purple-200 to-purple-400 border-[2px] border-purple-600 shadow-none"
           }`}
           onClick={() => {
-            setActive("Angry");
+            dispatch(emulatorActions.personalityUpdated("Angry"));
           }}
         >
           Angry
         </div>
         <div
           className={`cursor-pointer hover:scale-[1.05] h-fit bg-gradient-to-br from-gray-200 to-gray-400 text-gray-700 font-medium rounded-xl px-3 py-1 shadow-sm shadow-gray-300 ${
-            active == "Impatient" &&
+            personality == "Impatient" &&
             "from-purple-200 to-purple-400 border-[2px] border-purple-600 shadow-none"
           }`}
           onClick={() => {
-            setActive("Impatient");
+            dispatch(emulatorActions.personalityUpdated("Impatient"));
           }}
         >
           Impatient

@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { emulatorActions } from "../../store/emulatorSlice";
 
 const Strictness = () => {
-  const [value, setValue] = useState(1);
+  const dispatch = useDispatch();
+  const value = useSelector((state) => state.emulator.strictness);
 
   const handleChange = (event) => {
-    setValue(Number(event.target.value));
+    dispatch(emulatorActions.strictnessUpdated(Number(event.target.value)));
   };
 
   const getValueLabel = () => {
