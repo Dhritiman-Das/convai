@@ -10,11 +10,10 @@ const emulatorSlice = createSlice({
   },
   reducers: {
     botTalked(state, action) {
-      state.chatHistory.push({ by: "bot", message: action.payload });
-      console.log("Chat history ", state.chatHistory);
+      state.chatHistory.push({ role: "bot", content: action.payload });
     },
     humanTalked(state, action) {
-      state.chatHistory.push({ by: "human", message: action.payload });
+      state.chatHistory.push({ role: "human", content: action.payload });
     },
     conversationStyleUpdated(state, action) {
       state.conversationStyle = action.payload;

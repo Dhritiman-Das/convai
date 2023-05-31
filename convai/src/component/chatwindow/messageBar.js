@@ -1,25 +1,24 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { emulatorActions } from "../../store/emulatorSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
 const MessageBar = () => {
-  const API_KEY = "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";
   const dispatch = useDispatch();
   const ref = useRef("");
   const data = useSelector((state) => state.emulator);
+  // const [prompt, setPrompt] = useState("");
   useEffect(() => {
     const chatHistory = data.chatHistory;
     if (chatHistory.length > 0) {
       const lastMessageObj = chatHistory[chatHistory.length - 1];
-      console.log("Inside ", chatHistory, lastMessageObj, lastMessageObj.by);
-      if (lastMessageObj.by == "human") {
-        generatePrompt(chatHistory);
+      console.log("Inside ", chatHistory, lastMessageObj, lastMessageObj.role);
+      if (lastMessageObj.role == "human") {
+        sendMessagePost(generatePrompt(chatHistory));
       }
     }
   }, [data.chatHistory]);
   const generatePrompt = (chatHistory) => {
-    // const chatHistory = data.chatHistory;
     const conversationStyle = data.conversationStyle;
     const personality = data.personality;
     const strictness = data.strictness;
@@ -43,24 +42,22 @@ const MessageBar = () => {
     Generate the next response based on the conversation history
     `;
   };
-  const sendMessage = async () => {
-    const message = ref.current.value;
-    dispatch(emulatorActions.humanTalked(message));
-    ref.current.value = "";
-
+  const sendMessagePost = async (prompt) => {
     try {
-      // Make the Axios POST request
       const response = await axios.post("http://localhost:5000/completions", {
         prompt,
       });
       console.log("response is ", response);
       const reply = response.data.choices[0].message.content;
-      // Dispatch the action with the response data
       dispatch(emulatorActions.botTalked(reply));
     } catch (error) {
-      // Handle the error if the request fails
       console.error("Error:", error);
     }
+  };
+  const sendMessage = async () => {
+    const message = ref.current.value;
+    dispatch(emulatorActions.humanTalked(message));
+    ref.current.value = "";
   };
 
   const handleKeyPress = (event) => {

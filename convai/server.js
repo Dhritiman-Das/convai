@@ -3,12 +3,13 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 app.use(express.json());
-
 app.use(cors());
 
-const API_KEY = "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";
+const API_KEY = "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";
 
 app.post("/completions", async (req, res) => {
+  console.log(req.body);
+  const prompt = req.body.prompt;
   const options = {
     method: "POST",
     headers: {
@@ -17,7 +18,7 @@ app.post("/completions", async (req, res) => {
     },
     body: JSON.stringify({
       model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: "how are you?" }],
+      messages: [{ role: "user", content: prompt }],
       max_tokens: 100,
     }),
   };

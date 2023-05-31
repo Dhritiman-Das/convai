@@ -8,8 +8,10 @@ const Body = () => {
     <div className="flex-grow overflow-y-auto">
       {chatHistory.map((item) => (
         <>
-          {item.by == "human" && <Message by="human" message={item.message} />}
-          {item.by == "bot" && <Message by="bot" message={item.message} />}
+          {item.role == "human" && (
+            <Message by="human" message={item.content} />
+          )}
+          {item.role == "bot" && <Message by="bot" message={item.content} />}
         </>
       ))}
     </div>
