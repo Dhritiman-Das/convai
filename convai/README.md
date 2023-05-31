@@ -78,4 +78,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Acknowledgments
 
-- This app was developed as part of a project or course.
+- This app was developed as part of a challenge.
